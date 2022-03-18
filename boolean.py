@@ -15,8 +15,5 @@ print(1>2)  #False
 #Membership Operator
 print('atesi' in 'name atesi') #Ture
 
-#import os.path
-os.path.exists('boolean.py')
-from cgi import print_form
 import os.path
 print(os.path.exists('boolean.py'))
