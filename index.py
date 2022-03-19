@@ -26,6 +26,7 @@ print('''<!doctype html>
     <ol>
         {listStr}
     <ol>
+    <a href="create.py">create</a>
     <h2>{title}</h2>
     <P>{desc}</p>
 </body>
