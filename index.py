@@ -6,15 +6,17 @@ import cgi, os
 files = os.listdir('data')
 listStr = ''
 for item in files:
-    listStr = listStr + '<li><a href="index.py?id={name}">{name}</a></li>'.format(name = item)
+    listStr = listStr + '<li><a href="index.py?id={name}">{name}</a></li>'.format(name=item)
 
 form = cgi.FieldStorage()
 if 'id' in form:
     pageId = form["id"].value
     description = open('data/'+pageId, 'r').read()
+    update_link = '<a href="update.py?id={}">update</a>'.format(pageId)
 else:
-    pageID = 'welcome'
+    pageId = 'welcome'
     description = 'hello, web'    
+    update_link = ''
 print('''<!doctype html>
 <html>
 <head>
@@ -22,13 +24,14 @@ print('''<!doctype html>
     <meta charset="utf-8">
 </head>
 <body>
-    <h1><a href="index.html">WEB</a></h1>
+    <h1><a href="index.py">WEB</a></h1>
     <ol>
-        {listStr}
+      {listStr}
     <ol>
     <a href="create.py">create</a>
+    <a href="update.py">update</a>
     <h2>{title}</h2>
     <P>{desc}</p>
 </body>
 </html>
-'''.format(title=pageID, desc=description, listStr=listStr))
+'''.format(title=pageId, desc=description, listStr=listStr, update_link=update_link))
