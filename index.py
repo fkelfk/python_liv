@@ -1,19 +1,14 @@
 #!/usr/local/bin/python3
 print("Content-Type: text/html")
 print()
-import cgi, os
-
-def getList():
-    files = os.listdir('data')
-    listStr = ''
-    for item in files:
-        listStr = listStr + '<li><a href="index.py?id={name}">{name}<a/></il>'.format(name=item)
-    return listStr    
+import cgi, os, view
 
 form = cgi.FieldStorage()
 if 'id' in form:
     pageId = form["id"].value
     description = open('data/'+pageId, 'r').read()
+    description = description.replace('<', '&lt;')
+    description = description.replace('>', '&gt;')
     update_link = '<a href="update.py?id={}">update</a>'.format(pageId)
     delete_action = '''
         <form action="process_delete.py" method="post">
@@ -44,4 +39,4 @@ print('''<!doctype html>
     <P>{desc}</p>
 </body>
 </html>
-'''.format(title=pageId, desc=description, listStr=getList(), update_link=update_link, delete_action=delete_action))
+'''.format(title=pageId, desc=description, listStr=view.getList(), update_link=update_link, delete_action=delete_action))
