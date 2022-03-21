@@ -1,5 +1,5 @@
 #!/usr/local/bin/python3
-print("content-Type: text/html")
+print("Content-Type: text/html")
 print()
 import cgi, os
 
@@ -13,7 +13,7 @@ if 'id' in form:
     pageId = form["id"].value
     description = open('data/'+pageId, 'r').read()
 else:
-    pageID = 'welcome'
+    pageId = 'welcome'
     description = 'hello, web'    
 print('''<!doctype html>
 <html>
@@ -22,10 +22,10 @@ print('''<!doctype html>
     <meta charset="utf-8">
 </head>
 <body>
-    <h1><a href="index.html">WEB</a></h1>
+    <h1><a href="index.py">WEB</a></h1>
     <ol>
         {listStr}
-    <ol>
+    </ol>
     <a href="create.py">create</a>
     <form action="process_create.py" method="post">
         <p><input type="text" name="title" placeholder="title"></p>
@@ -34,4 +34,4 @@ print('''<!doctype html>
     </form>    
 </body>
 </html>
-'''.format(title=pageID, desc=description, listStr=listStr))
+'''.format(title=pageId, desc=description, listStr=listStr))
